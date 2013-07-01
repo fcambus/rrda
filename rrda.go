@@ -154,15 +154,14 @@ func ptr(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	header := `-------------------------------------------------------------------------------
-RRDA (RRDA REST DNS API) (c) by Frederic Cambus 2012-2013
--------------------------------------------------------------------------------`
+	header := "-------------------------------------------------------------------------------\n        RRDA (RRDA REST DNS API) 1.00 (c) by Frederic Cambus 2012-2013\n-------------------------------------------------------------------------------"
 
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")
 
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
+		fmt.Println(header)
+		fmt.Println("\nUSAGE :")
 		flag.PrintDefaults()
 	}
 	flag.Parse()

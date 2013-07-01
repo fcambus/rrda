@@ -104,3 +104,7 @@ RRDA is developed by Frederic Cambus
 ## Resources
 
 Project Homepage : http://www.statdns.com
+
+Latest tarball release : http://www.statdns.com/rrda/rrda-1.00.tar.gz
+
+GitHub : https://github.com/fcambus/rrda

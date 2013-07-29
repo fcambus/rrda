@@ -1,3 +1,15 @@
+                                    ______  ____________________.
+                                   /     / /                    |
+                                  /     . /                     |  R
+                   ________  ____/___  __/_____   _____         |
+             __  __\__    /__\__    /__\__    /__\\__  \__      |  R
+              ///   _/   //   _/   //   |/    \\    ._    \     |
+              _/    \    \_   \    \_   '     /_    |/    //    |  D
+              \_____/_____/___/_____/__________/____/    /_     |
+           <---------h7/dS!---- \      . \ -------\\______/     |  A
+                                 \      \ \                     |
+                                  \______\ \____________________|
+
 ## Description
 
 RRDA is a REST API written in Go allowing to perform DNS queries over HTTP, and to get reverse PTR records for both IPv4 and IPv6 addresses. It outputs JSON-encoded DNS responses.

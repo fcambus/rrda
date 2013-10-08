@@ -46,7 +46,8 @@ The following examples assume there is a resolver on localhost listening on port
 
 URL Scheme : http://server:port/resolver:port/domain/querytype
 
-- Example : http://127.0.0.1:8080/127.0.0.1:53/example.org/ns
+- Example (using an IPv4 resolver) : http://127.0.0.1:8080/127.0.0.1:53/example.org/ns
+- Example (using an IPv6 resolver) : http://127.0.0.1:8080/[::1]:53/example.org/ns
 
 ### Getting Reverse PTR Records (for both IPv4 and IPv6 addresses)
 

@@ -4,7 +4,7 @@
 /* http://www.statdns.com                                                    */
 /*                                                                           */
 /* Created: 2012/03/11                                                       */
-/* Last Updated: 2013/07/01                                                  */
+/* Last Updated: 2013/10/09                                                  */
 /*                                                                           */
 /* RRDA is released under the BSD 3-Clause license.                          */
 /* See LICENSE file for details.                                             */
@@ -126,7 +126,7 @@ func query(w http.ResponseWriter, r *http.Request) {
 	domain := dns.Fqdn(r.URL.Query().Get(":domain"))
 	querytype := r.URL.Query().Get(":querytype")
 
-	if domain, err := idna.ToASCII(domain); err == nil { // ValidateValid IP address (IPv4 or IPv6)
+	if domain, err := idna.ToASCII(domain); err == nil { // Valid domain name (ASCII or IDN)
 		if _, _, isDomain := dns.IsDomainName(domain); isDomain { // Well-formed domain name
 			if querytype, ok := dns.StringToType[strings.ToUpper(querytype)]; ok { // Valid DNS query type
 				resolve(w, server, domain, querytype)

@@ -121,7 +121,7 @@ Redo:
 }
 
 // Handler for DNS queries
-func query(w http.ResponseWriter, r *http.Request) {
+func Query(w http.ResponseWriter, r *http.Request) {
 	server := r.URL.Query().Get(":server")
 	domain := dns.Fqdn(r.URL.Query().Get(":domain"))
 	querytype := r.URL.Query().Get(":querytype")
@@ -142,7 +142,7 @@ func query(w http.ResponseWriter, r *http.Request) {
 }
 
 // Handler for reverse DNS queries
-func ptr(w http.ResponseWriter, r *http.Request) {
+func Ptr(w http.ResponseWriter, r *http.Request) {
 	server := r.URL.Query().Get(":server")
 	ip := r.URL.Query().Get(":ip")
 
@@ -169,8 +169,8 @@ func main() {
 	fmt.Println(header)
 
 	m := pat.New()
-	m.Get("/:server/x/:ip", http.HandlerFunc(ptr))
-	m.Get("/:server/:domain/:querytype", http.HandlerFunc(query))
+	m.Get("/:server/x/:ip", http.HandlerFunc(Ptr))
+	m.Get("/:server/:domain/:querytype", http.HandlerFunc(Query))
 
 	if err := http.ListenAndServe(*host+":"+*port, m); err != nil {
 		fmt.Println("\nERROR :", err)

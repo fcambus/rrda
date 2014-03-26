@@ -1,10 +1,10 @@
 /*****************************************************************************/
 /*                                                                           */
-/* RRDA (RRDA REST DNS API) 1.00 (c) by Frederic Cambus 2012-2013            */
+/* RRDA (RRDA REST DNS API) 1.00 (c) by Frederic Cambus 2012-2014            */
 /* http://www.statdns.com                                                    */
 /*                                                                           */
 /* Created: 2012/03/11                                                       */
-/* Last Updated: 2013/12/07                                                  */
+/* Last Updated: 2014/03/26                                                  */
 /*                                                                           */
 /* RRDA is released under the BSD 3-Clause license.                          */
 /* See LICENSE file for details.                                             */

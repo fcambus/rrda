@@ -25,9 +25,9 @@ RRDA requires the following Go libraries :
 
 ## Installation
 
-Build and install with the `go` tool :
+Build and install with the `go` tool, all dependencies will be automatically fetched and compiled :
 
-	go build rrda
+	go get -d -v ./... && go build -v ./...
 	go install rrda
 
 ## Usage 

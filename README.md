@@ -38,6 +38,16 @@ By default, RRDA will bind on localhost, port 8080.
 	  -host="127.0.0.1": Set the server host
 	  -port="8080": Set the server port
 
+## Running RRDA at boot time
+
+RRDA is bundled with a Debian initscript, see : `debian/rrda`
+
+Modify the line containing `DAEMON=rrda` and specify the path to your RRDA binary.
+
+To launch the daemon at startup, run :
+	
+	update-rc.d rrda defaults
+
 ## Making Queries
 
 The following examples assume there is a resolver on localhost listening on port 53.
@@ -89,6 +99,17 @@ When incorrect user input is entered, the server returns an HTTP 400 Error (Bad 
 - Code 403 : Input string is not a valid IP address
 - Code 404 : Invalid DNS query type
 
+### Examples
+
+	curl http://127.0.0.1:8080/:53/statdns..net/a
+	{"code":402,"message":"Input string is not a well-formed domain name"}
+ 
+	curl http://127.0.0.1:8080/:53/x/127.0
+	{"code":403,"message":"Input string is not a valid IP address"}
+
+	curl http://127.0.0.1:8080/:53/statdns.net/error
+	{"code":404,"message":"Invalid DNS query type"}
+
 ## Server Errors
 
 When the DNS server cannot be reached or returns an error, the server returns an HTTP 500 Error (Internal Server Error), along with a JSON-encoded error message.
@@ -97,6 +118,20 @@ When the DNS server cannot be reached or returns an error, the server returns an
 - Code 502 : The name server encountered an internal failure while processing this request (SERVFAIL)
 - Code 503 : Some name that ought to exist, does not exist (NXDOMAIN)
 - Code 505 : The name server refuses to perform the specified operation for policy or security reasons (REFUSED)
+
+### Examples
+
+	curl http://127.0.0.1:8080/127.0.0.2:53/statdns.net/a
+	{"code":501,"message":"DNS server could not be reached"}
+
+	curl http://127.0.0.1:8080/:53/lame2.broken-on-purpose.generic-nic.net/soa
+	{"code":502,"message":"The name server encountered an internal failure while processing this request (SERVFAIL)"}
+
+	curl http://127.0.0.1:8080/:53/statdns.nete/a
+	{"code":503,"message":"Some name that ought to exist, does not exist (NXDOMAIN)"}
+
+	curl http://127.0.0.1:8080/:53/lame.broken-on-purpose.generic-nic.net/soa
+	{"code":505,"message":"The name server refuses to perform the specified operation for policy or security reasons (REFUSED)"}
 
 ## Sites using RRDA
 

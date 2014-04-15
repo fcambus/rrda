@@ -154,7 +154,7 @@ func ptr(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	header := "-------------------------------------------------------------------------------\n        RRDA (RRDA REST DNS API) 1.00 (c) by Frederic Cambus 2012-2013\n-------------------------------------------------------------------------------"
+	header := "-------------------------------------------------------------------------------\n        RRDA (RRDA REST DNS API) 1.00 (c) by Frederic Cambus 2012-2014\n-------------------------------------------------------------------------------"
 
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")
@@ -168,6 +168,8 @@ func main() {
 
 	fmt.Println(header)
 
+	fmt.Println("\nListening on :", *host + ":" + *port)
+
 	m := pat.New()
 	m.Get("/:server/x/:ip", http.HandlerFunc(ptr))
 	m.Get("/:server/:domain/:querytype", http.HandlerFunc(query))
@@ -176,6 +178,4 @@ func main() {
 		fmt.Println("\nERROR :", err)
 		os.Exit(1)
 	}
-
-	fmt.Println("\nListening on port :", *port)
 }

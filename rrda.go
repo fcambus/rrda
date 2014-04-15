@@ -68,8 +68,10 @@ func error(w http.ResponseWriter, status int, code int, message string) {
 }
 
 // Generate JSON output
-func jsonify(w http.ResponseWriter, question []dns.Question, answer []dns.RR, authority []dns.RR, additional []dns.RR) {
+func jsonify(w http.ResponseWriter, r *http.Request, question []dns.Question, answer []dns.RR, authority []dns.RR, additional []dns.RR) {
 	var answerArray, authorityArray, additionalArray []*Section
+
+	callback := r.URL.Query().Get("callback")
 
 	for _, answer := range answer {
 		answerArray = append(answerArray, &Section{answer.Header().Name, dns.TypeToString[answer.Header().Rrtype], dns.ClassToString[answer.Header().Class], answer.Header().Ttl, answer.Header().Rdlength, rdata(answer)})
@@ -83,13 +85,17 @@ func jsonify(w http.ResponseWriter, question []dns.Question, answer []dns.RR, au
 		additionalArray = append(additionalArray, &Section{additional.Header().Name, dns.TypeToString[additional.Header().Rrtype], dns.ClassToString[additional.Header().Class], additional.Header().Ttl, additional.Header().Rdlength, rdata(additional)})
 	}
 
-	if output, err := json.MarshalIndent(Message{[]*Question{&Question{question[0].Name, dns.TypeToString[question[0].Qtype], dns.ClassToString[question[0].Qclass]}}, answerArray, authorityArray, additionalArray}, "", "    "); err == nil {
-		io.WriteString(w, string(output))
+	if json, err := json.MarshalIndent(Message{[]*Question{&Question{question[0].Name, dns.TypeToString[question[0].Qtype], dns.ClassToString[question[0].Qclass]}}, answerArray, authorityArray, additionalArray}, "", "    "); err == nil {
+		if (callback != "") {
+			io.WriteString(w, callback + "(" + string(json) + ");")
+		} else {
+			io.WriteString(w, string(json))
+		}
 	}
 }
 
 // Perform DNS resolution
-func resolve(w http.ResponseWriter, server string, domain string, querytype uint16) {
+func resolve(w http.ResponseWriter, r *http.Request, server string, domain string, querytype uint16) {
 	m := new(dns.Msg)
 	m.SetQuestion(domain, querytype)
 	m.MsgHdr.RecursionDesired = true
@@ -113,7 +119,7 @@ Redo:
 		case dns.RcodeRefused:
 			error(w, 500, 505, "The name server refuses to perform the specified operation for policy or security reasons (REFUSED)")
 		default:
-			jsonify(w, in.Question, in.Answer, in.Ns, in.Extra)
+			jsonify(w, r, in.Question, in.Answer, in.Ns, in.Extra)
 		}
 	} else {
 		error(w, 500, 501, "DNS server could not be reached")
@@ -129,7 +135,7 @@ func query(w http.ResponseWriter, r *http.Request) {
 	if domain, err := idna.ToASCII(domain); err == nil { // Valid domain name (ASCII or IDN)
 		if _, isDomain := dns.IsDomainName(domain); isDomain { // Well-formed domain name
 			if querytype, ok := dns.StringToType[strings.ToUpper(querytype)]; ok { // Valid DNS query type
-				resolve(w, server, domain, querytype)
+				resolve(w, r, server, domain, querytype)
 			} else {
 				error(w, 400, 404, "Invalid DNS query type")
 			}
@@ -147,7 +153,7 @@ func ptr(w http.ResponseWriter, r *http.Request) {
 	ip := r.URL.Query().Get(":ip")
 
 	if arpa, err := dns.ReverseAddr(ip); err == nil { // Valid IP address (IPv4 or IPv6)
-		resolve(w, server, arpa, dns.TypePTR)
+		resolve(w, r, server, arpa, dns.TypePTR)
 	} else {
 		error(w, 400, 403, "Input string is not a valid IP address")
 	}

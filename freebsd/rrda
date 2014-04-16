@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# PROVIDE: rrda
+
+. /etc/rc.subr
+
+name=rrda
+rcvar=rrda_enable
+
+command="/usr/local/sbin/${name}"
+
+start_cmd="/usr/sbin/daemon -f $command"
+
+load_rc_config $name
+run_rc_command "$1"

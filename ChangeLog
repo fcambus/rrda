@@ -1,3 +1,12 @@
+RRDA 1.01 (2014-05-03)
+
+- Update to match Go DNS "IsDomainName" new prototype
+- Adding Debian init script
+- Adding FreeBSD rc.d script
+- Adding JSONP support
+
+
+
 RRDA 1.00 (2013-07-01)
 
 - Initial release

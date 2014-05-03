@@ -171,6 +171,6 @@ RRDA is developed by Frederic Cambus
 
 Project Homepage : http://www.statdns.com
 
-Latest tarball release : http://www.statdns.com/rrda/rrda-1.00.tar.gz
+Latest tarball release : http://www.statdns.com/rrda/rrda-1.01.tar.gz
 
 GitHub : https://github.com/fcambus/rrda

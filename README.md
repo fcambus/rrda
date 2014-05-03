@@ -78,6 +78,12 @@ URL Scheme : http://server:port/resolver:port/x/ip
 - Example (IPv4) : http://127.0.0.1:8080/127.0.0.1:53/x/193.0.6.139
 - Example (IPv6) : http://127.0.0.1:8080/127.0.0.1:53/x/2001:67c:2e8:22::c100:68b
 
+## JSONP Support
+
+RRDA supports JSONP callbacks.
+
+- Example : http://127.0.0.1:8080/127.0.0.1:53/example.org/ns?callback=rrda
+
 ## JSON Output Schema
 
 The output is a JSON object containing the following arrays, representing the appropriate sections of DNS packets :

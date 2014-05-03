@@ -40,13 +40,25 @@ By default, RRDA will bind on localhost, port 8080.
 
 ## Running RRDA at boot time
 
-RRDA is bundled with a Debian initscript, see : `debian/rrda`
+### Debian init script
 
-Modify the line containing `DAEMON=rrda` and specify the path to your RRDA binary.
+RRDA is bundled with a Debian init script, see : `debian/rrda`
+
+Copy the `debian/rrda` file in `/etc/init.d` and modify the line containing `DAEMON=rrda` to specify the path to your RRDA binary.
 
 To launch the daemon at startup, run :
 	
 	update-rc.d rrda defaults
+
+### FreeBSD rc.d script 
+
+RRDA is bundled with a FreeBSD rc.d script, see : `freebsd/rrda`
+ 
+Copy the `freebsd/rrda` file in `/usr/local/etc/rc.d` and the RRDA binary in `/usr/local/sbin`.
+
+To launch the daemon at startup, add the following line in `/etc/rc.conf` :
+
+	rrda_enable="YES"
 
 ## Making Queries
 

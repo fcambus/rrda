@@ -14,6 +14,8 @@
 
 RRDA is a REST API written in Go allowing to perform DNS queries over HTTP, and to get reverse PTR records for both IPv4 and IPv6 addresses. It outputs JSON-encoded DNS responses.
 
+The API allows to specify which name server to query (either recursive or authoritative), and can be used as a foundation to build DNS looking glasses.
+
 RRDA is a recursive acronym for "RRDA REST DNS API".
 
 ## Requirements

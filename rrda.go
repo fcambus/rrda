@@ -5,7 +5,7 @@
 /* http://www.statdns.com                                                    */
 /*                                                                           */
 /* Created: 2012-03-11                                                       */
-/* Last Updated: 2016-01-05                                                  */
+/* Last Updated: 2016-02-02                                                  */
 /*                                                                           */
 /* RRDA is released under the BSD 3-Clause license.                          */
 /* See LICENSE file for details.                                             */
@@ -15,7 +15,7 @@
 package main
 
 import (
-	"code.google.com/p/go.net/idna"
+	"golang.org/x/net/idna"
 	"encoding/json"
 	"flag"
 	"fmt"

@@ -1,3 +1,13 @@
+RRDA 1.02 (2016-02-24)
+
+- Adding CORS support by default
+- Updating import path for the 'idna' package, as code.google.com is
+  now closed
+- Use error code returned by dns.Exchange() to detect truncated DNS
+  messages
+
+
+
 RRDA 1.01 (2014-05-03)
 
 - Update to match Go DNS "IsDomainName" new prototype

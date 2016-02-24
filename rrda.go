@@ -1,6 +1,6 @@
 /*****************************************************************************/
 /*                                                                           */
-/* RRDA (RRDA REST DNS API) 1.01                                             */
+/* RRDA (RRDA REST DNS API) 1.02                                             */
 /* Copyright (c) 2012-2016, Frederic Cambus                                  */
 /* http://www.statdns.com                                                    */
 /*                                                                           */
@@ -162,7 +162,7 @@ func ptr(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	header := "-------------------------------------------------------------------------------\n        RRDA (RRDA REST DNS API) 1.01 (c) by Frederic Cambus 2012-2016\n-------------------------------------------------------------------------------"
+	header := "-------------------------------------------------------------------------------\n        RRDA (RRDA REST DNS API) 1.02 (c) by Frederic Cambus 2012-2016\n-------------------------------------------------------------------------------"
 
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")

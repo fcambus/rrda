@@ -15,12 +15,12 @@
 package main
 
 import (
-	"golang.org/x/net/idna"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"github.com/bmizerany/pat"
 	"github.com/miekg/dns"
+	"golang.org/x/net/idna"
 	"io"
 	"net/http"
 	"os"
@@ -87,8 +87,8 @@ func jsonify(w http.ResponseWriter, r *http.Request, question []dns.Question, an
 	}
 
 	if json, err := json.MarshalIndent(Message{[]*Question{&Question{question[0].Name, dns.TypeToString[question[0].Qtype], dns.ClassToString[question[0].Qclass]}}, answerArray, authorityArray, additionalArray}, "", "    "); err == nil {
-		if (callback != "") {
-			io.WriteString(w, callback + "(" + string(json) + ");")
+		if callback != "" {
+			io.WriteString(w, callback+"("+string(json)+");")
 		} else {
 			io.WriteString(w, string(json))
 		}
@@ -176,7 +176,7 @@ func main() {
 
 	fmt.Println(header)
 
-	fmt.Println("\nListening on :", *host + ":" + *port)
+	fmt.Println("\nListening on :", *host+":"+*port)
 
 	m := pat.New()
 	m.Get("/:server/x/:ip", http.HandlerFunc(ptr))

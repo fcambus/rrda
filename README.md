@@ -160,7 +160,7 @@ When the DNS server cannot be reached or returns an error, the server returns an
 
 ## License
 
-RRDA is released under the BSD 3-Clause license. See `LICENSE` file for details.
+RRDA is released under the BSD 2-Clause license. See `LICENSE` file for details.
 
 ## Author
 

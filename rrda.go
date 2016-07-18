@@ -5,9 +5,9 @@
 /* http://www.statdns.com                                                    */
 /*                                                                           */
 /* Created: 2012-03-11                                                       */
-/* Last Updated: 2016-02-02                                                  */
+/* Last Updated: 2016-07-18                                                  */
 /*                                                                           */
-/* RRDA is released under the BSD 3-Clause license.                          */
+/* RRDA is released under the BSD 2-Clause license.                          */
 /* See LICENSE file for details.                                             */
 /*                                                                           */
 /*****************************************************************************/

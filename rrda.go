@@ -22,7 +22,9 @@ import (
 	"github.com/miekg/dns"
 	"golang.org/x/net/idna"
 	"io"
+	"net"
 	"net/http"
+	"net/http/fcgi"
 	"os"
 	"strings"
 )
@@ -164,6 +166,7 @@ func ptr(w http.ResponseWriter, r *http.Request) {
 func main() {
 	header := "-------------------------------------------------------------------------------\n        RRDA (RRDA REST DNS API) 1.02 (c) by Frederic Cambus 2012-2016\n-------------------------------------------------------------------------------"
 
+	fastcgi := flag.Bool("fastcgi", false, "Enable FastCGI mode")
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")
 
@@ -182,8 +185,17 @@ func main() {
 	m.Get("/:server/x/:ip", http.HandlerFunc(ptr))
 	m.Get("/:server/:domain/:querytype", http.HandlerFunc(query))
 
-	if err := http.ListenAndServe(*host+":"+*port, m); err != nil {
-		fmt.Println("\nERROR :", err)
-		os.Exit(1)
+	if *fastcgi {
+		listener, _ := net.Listen("tcp", *host+":"+*port)
+
+		if err := fcgi.Serve(listener, m); err != nil {
+			fmt.Println("\nERROR :", err)
+			os.Exit(1)
+		}
+	} else {
+		if err := http.ListenAndServe(*host+":"+*port, m); err != nil {
+			fmt.Println("\nERROR :", err)
+			os.Exit(1)
+		}
 	}
 }

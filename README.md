@@ -12,29 +12,33 @@
 
 ## Description
 
-RRDA is a REST API written in Go allowing to perform DNS queries over HTTP, and to get reverse PTR records for both IPv4 and IPv6 addresses. It outputs JSON-encoded DNS responses.
+RRDA is a REST API written in Go allowing to perform DNS queries over HTTP,
+and to get reverse PTR records for both IPv4 and IPv6 addresses. It outputs
+JSON-encoded DNS responses.
 
-The API allows to specify which name server to query (either recursive or authoritative), and can be used as a foundation to build DNS looking glasses.
+The API allows to specify which name server to query (either recursive or
+authoritative), and can be used as a foundation to build DNS looking glasses.
 
 RRDA is a recursive acronym for "RRDA REST DNS API".
 
 ## Requirements
 
-RRDA requires the following Go libraries :
+RRDA requires the following Go libraries:
 
-- dns : DNS library in Go - https://github.com/miekg/dns
-- pat : pattern muxer for Go - https://github.com/bmizerany/pat
+- dns: DNS library in Go - https://github.com/miekg/dns
+- pat: pattern muxer for Go - https://github.com/bmizerany/pat
 
 ## Installation
 
-Build and install with the `go` tool, all dependencies will be automatically fetched and compiled :
+Build and install with the `go` tool, all dependencies will be automatically
+fetched and compiled:
 
 	go get -d -v ./... && go build -v ./...
 	go install rrda
 
-## Usage 
+## Usage
 
-By default, RRDA will bind on localhost, port 8080.
+By default, RRDA will bind on localhost, port 8080, in HTTP mode.
 
 	Usage of ./rrda:
 	  -host="127.0.0.1": Set the server host
@@ -44,21 +48,23 @@ By default, RRDA will bind on localhost, port 8080.
 
 ### Debian init script
 
-RRDA is bundled with a Debian init script, see : `debian/rrda`
+RRDA is bundled with a Debian init script, see: `debian/rrda`
 
-Copy the `debian/rrda` file in `/etc/init.d` and modify the line containing `DAEMON=rrda` to specify the path to your RRDA binary.
+Copy the `debian/rrda` file in `/etc/init.d` and modify the line containing
+`DAEMON=rrda` to specify the path to your RRDA binary.
 
-To launch the daemon at startup, run :
-	
+To launch the daemon at startup, run:
+
 	update-rc.d rrda defaults
 
 ### FreeBSD rc.d script 
 
-RRDA is bundled with a FreeBSD rc.d script, see : `freebsd/rrda`
- 
-Copy the `freebsd/rrda` file in `/usr/local/etc/rc.d` and the RRDA binary in `/usr/local/sbin`.
+RRDA is bundled with a FreeBSD rc.d script, see: `freebsd/rrda`
 
-To launch the daemon at startup, add the following line in `/etc/rc.conf` :
+Copy the `freebsd/rrda` file in `/usr/local/etc/rc.d` and the RRDA binary in
+`/usr/local/sbin`.
+
+To launch the daemon at startup, add the following line in `/etc/rc.conf`:
 
 	rrda_enable="YES"
 
@@ -68,27 +74,28 @@ The following examples assume there is a resolver on localhost listening on port
 
 ### Getting Resources Records
 
-URL Scheme : http://server:port/resolver:port/domain/querytype
+URL Scheme: http://server:port/resolver:port/domain/querytype
 
-- Example (using an IPv4 resolver) : http://127.0.0.1:8080/127.0.0.1:53/example.org/ns
-- Example (using an IPv6 resolver) : http://127.0.0.1:8080/[::1]:53/example.org/ns
+- Example (using an IPv4 resolver): http://127.0.0.1:8080/127.0.0.1:53/example.org/ns
+- Example (using an IPv6 resolver): http://127.0.0.1:8080/[::1]:53/example.org/ns
 
 ### Getting Reverse PTR Records (for both IPv4 and IPv6 addresses)
 
-URL Scheme : http://server:port/resolver:port/x/ip
+URL Scheme: http://server:port/resolver:port/x/ip
 
-- Example (IPv4) : http://127.0.0.1:8080/127.0.0.1:53/x/193.0.6.139
-- Example (IPv6) : http://127.0.0.1:8080/127.0.0.1:53/x/2001:67c:2e8:22::c100:68b
+- Example (IPv4): http://127.0.0.1:8080/127.0.0.1:53/x/193.0.6.139
+- Example (IPv6): http://127.0.0.1:8080/127.0.0.1:53/x/2001:67c:2e8:22::c100:68b
 
 ## JSONP Support
 
 RRDA supports JSONP callbacks.
 
-- Example : http://127.0.0.1:8080/127.0.0.1:53/example.org/ns?callback=rrda
+- Example: http://127.0.0.1:8080/127.0.0.1:53/example.org/ns?callback=rrda
 
 ## JSON Output Schema
 
-The output is a JSON object containing the following arrays, representing the appropriate sections of DNS packets :
+The output is a JSON object containing the following arrays, representing the
+appropriate sections of DNS packets:
 
 - question
 - answer
@@ -112,12 +119,13 @@ The output is a JSON object containing the following arrays, representing the ap
 
 ## Client Errors
 
-When incorrect user input is entered, the server returns an HTTP 400 Error (Bad Request), along with a JSON-encoded error message.
+When incorrect user input is entered, the server returns an HTTP 400 Error
+(Bad Request), along with a JSON-encoded error message.
 
-- Code 401 : Input string could not be parsed
-- Code 402 : Input string is not a well-formed domain name
-- Code 403 : Input string is not a valid IP address
-- Code 404 : Invalid DNS query type
+- Code 401: Input string could not be parsed
+- Code 402: Input string is not a well-formed domain name
+- Code 403: Input string is not a valid IP address
+- Code 404: Invalid DNS query type
 
 ### Examples
 
@@ -132,12 +140,14 @@ When incorrect user input is entered, the server returns an HTTP 400 Error (Bad 
 
 ## Server Errors
 
-When the DNS server cannot be reached or returns an error, the server returns an HTTP 500 Error (Internal Server Error), along with a JSON-encoded error message.
+When the DNS server cannot be reached or returns an error, the server returns
+an HTTP 500 Error (Internal Server Error), along with a JSON-encoded error
+message.
 
-- Code 501 : DNS server could not be reached
-- Code 502 : The name server encountered an internal failure while processing this request (SERVFAIL)
-- Code 503 : Some name that ought to exist, does not exist (NXDOMAIN)
-- Code 505 : The name server refuses to perform the specified operation for policy or security reasons (REFUSED)
+- Code 501: DNS server could not be reached
+- Code 502: The name server encountered an internal failure while processing this request (SERVFAIL)
+- Code 503: Some name that ought to exist, does not exist (NXDOMAIN)
+- Code 505: The name server refuses to perform the specified operation for policy or security reasons (REFUSED)
 
 ### Examples
 
@@ -155,8 +165,8 @@ When the DNS server cannot be reached or returns an error, the server returns an
 
 ## Sites using RRDA
 
-- StatDNS : Rest DNS API - http://www.statdns.com/api/
-- DNS-LG : Multilocation DNS Looking Glass - http://www.dns-lg.com
+- StatDNS: Rest DNS API - http://www.statdns.com/api/
+- DNS-LG: Multilocation DNS Looking Glass - http://www.dns-lg.com
 
 ## License
 
@@ -166,13 +176,13 @@ RRDA is released under the BSD 2-Clause license. See `LICENSE` file for details.
 
 RRDA is developed by Frederic Cambus
 
-- Site : http://www.cambus.net
+- Site: http://www.cambus.net
 - Twitter: http://twitter.com/fcambus
 
 ## Resources
 
-Project Homepage : http://www.statdns.com
+Project homepage: http://www.statdns.com
 
-Latest tarball release : http://www.statdns.com/rrda/rrda-1.02.tar.gz
+Latest tarball release: http://www.statdns.com/rrda/rrda-1.02.tar.gz
 
-GitHub : https://github.com/fcambus/rrda
+GitHub: https://github.com/fcambus/rrda

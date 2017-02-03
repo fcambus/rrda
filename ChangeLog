@@ -1,3 +1,12 @@
+RRDA 1.03 (2017-??-??)
+
+- Relicensed under the BSD 2-Clause license
+- Add support for FastCGI mode
+- Add a command line flag to display version
+- Minor fixes and improvements
+
+
+
 RRDA 1.02 (2016-02-24)
 
 - Adding CORS support by default

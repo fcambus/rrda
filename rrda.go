@@ -188,7 +188,7 @@ func main() {
 
 	address := *host + ":" + *port
 
-	fmt.Println("Listening on (" + mode + " mode):", address)
+	fmt.Println("Listening on ("+mode+" mode):", address)
 
 	m := pat.New()
 	m.Get("/:server/x/:ip", http.HandlerFunc(ptr))

@@ -177,7 +177,6 @@ func main() {
 	}
 	flag.Parse()
 
-	address := *host + ":" + *port;
 	if *version {
 		fmt.Println("RRDA 1.02")
 		os.Exit(0)
@@ -186,6 +185,8 @@ func main() {
 	if *fastcgi {
 		mode = "FastCGI"
 	}
+
+	address := *host + ":" + *port
 
 	fmt.Println("Listening on (" + mode + " mode):", address)
 

@@ -172,7 +172,7 @@ func main() {
 
 	flag.Usage = func() {
 		fmt.Println(header)
-		fmt.Println("\nUSAGE :")
+		fmt.Println("\nUSAGE:")
 		flag.PrintDefaults()
 	}
 	flag.Parse()
@@ -189,12 +189,12 @@ func main() {
 		listener, _ := net.Listen("tcp", *host+":"+*port)
 
 		if err := fcgi.Serve(listener, m); err != nil {
-			fmt.Println("\nERROR :", err)
+			fmt.Println("\nERROR:", err)
 			os.Exit(1)
 		}
 	} else {
 		if err := http.ListenAndServe(*host+":"+*port, m); err != nil {
-			fmt.Println("\nERROR :", err)
+			fmt.Println("\nERROR:", err)
 			os.Exit(1)
 		}
 	}

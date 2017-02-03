@@ -40,9 +40,15 @@ fetched and compiled:
 
 By default, RRDA will bind on localhost, port 8080, in HTTP mode.
 
-	Usage of ./rrda:
-	  -host="127.0.0.1": Set the server host
-	  -port="8080": Set the server port
+	USAGE:
+	  -fastcgi
+	        Enable FastCGI mode
+	  -host string
+	        Set the server host (default "127.0.0.1")
+	  -port string
+	        Set the server port (default "8080")
+	  -version
+	        Display version
 
 ## Running RRDA at boot time
 

@@ -164,20 +164,16 @@ func ptr(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	header := "-------------------------------------------------------------------------------\n        RRDA (RRDA REST DNS API) 1.02 (c) by Frederic Cambus 2012-2016\n-------------------------------------------------------------------------------"
-
 	fastcgi := flag.Bool("fastcgi", false, "Enable FastCGI mode")
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")
 
 	flag.Usage = func() {
-		fmt.Println(header)
 		fmt.Println("\nUSAGE:")
 		flag.PrintDefaults()
 	}
 	flag.Parse()
 
-	fmt.Println(header)
 
 	fmt.Println("\nListening on :", *host+":"+*port)
 

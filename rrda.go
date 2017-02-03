@@ -167,6 +167,8 @@ func main() {
 	fastcgi := flag.Bool("fastcgi", false, "Enable FastCGI mode")
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")
+	version := flag.Bool("version", false, "Display version")
+
 	mode := "HTTP"
 
 	flag.Usage = func() {
@@ -176,6 +178,10 @@ func main() {
 	flag.Parse()
 
 	address := *host + ":" + *port;
+	if *version {
+		fmt.Println("RRDA 1.02")
+		os.Exit(0)
+	}
 
 	if *fastcgi {
 		mode = "FastCGI"

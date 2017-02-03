@@ -167,6 +167,7 @@ func main() {
 	fastcgi := flag.Bool("fastcgi", false, "Enable FastCGI mode")
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")
+	mode := "HTTP"
 
 	flag.Usage = func() {
 		fmt.Println("\nUSAGE:")
@@ -174,22 +175,27 @@ func main() {
 	}
 	flag.Parse()
 
+	address := *host + ":" + *port;
 
-	fmt.Println("\nListening on :", *host+":"+*port)
+	if *fastcgi {
+		mode = "FastCGI"
+	}
+
+	fmt.Println("Listening on (" + mode + " mode):", address)
 
 	m := pat.New()
 	m.Get("/:server/x/:ip", http.HandlerFunc(ptr))
 	m.Get("/:server/:domain/:querytype", http.HandlerFunc(query))
 
 	if *fastcgi {
-		listener, _ := net.Listen("tcp", *host+":"+*port)
+		listener, _ := net.Listen("tcp", address)
 
 		if err := fcgi.Serve(listener, m); err != nil {
 			fmt.Println("\nERROR:", err)
 			os.Exit(1)
 		}
 	} else {
-		if err := http.ListenAndServe(*host+":"+*port, m); err != nil {
+		if err := http.ListenAndServe(address, m); err != nil {
 			fmt.Println("\nERROR:", err)
 			os.Exit(1)
 		}

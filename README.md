@@ -63,7 +63,7 @@ To launch the daemon at startup, run:
 
 	update-rc.d rrda defaults
 
-### FreeBSD rc.d script 
+### FreeBSD rc.d script
 
 RRDA is bundled with a FreeBSD rc.d script, see: `freebsd/rrda`
 

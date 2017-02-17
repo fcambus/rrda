@@ -171,7 +171,7 @@ message.
 
 ## Sites using RRDA
 
-- StatDNS: Rest DNS API - http://www.statdns.com/api/
+- StatDNS: Rest DNS API - https://www.statdns.com/api/
 - DNS-LG: Multilocation DNS Looking Glass - http://www.dns-lg.com
 
 ## License
@@ -186,8 +186,8 @@ RRDA is developed by Frederic Cambus
 
 ## Resources
 
-Project homepage: http://www.statdns.com
+Project homepage: https://www.statdns.com
 
-Latest tarball release: http://www.statdns.com/rrda/rrda-1.02.tar.gz
+Latest tarball release: https://www.statdns.com/rrda/rrda-1.02.tar.gz
 
 GitHub: https://github.com/fcambus/rrda

@@ -1,11 +1,11 @@
 /*****************************************************************************/
 /*                                                                           */
 /* RRDA (RRDA REST DNS API) 1.02                                             */
-/* Copyright (c) 2012-2017, Frederic Cambus                                  */
+/* Copyright (c) 2012-2019, Frederic Cambus                                  */
 /* https://www.statdns.com                                                   */
 /*                                                                           */
 /* Created: 2012-03-11                                                       */
-/* Last Updated: 2017-02-17                                                  */
+/* Last Updated: 2019-12-11                                                  */
 /*                                                                           */
 /* RRDA is released under the BSD 2-Clause license.                          */
 /* See LICENSE file for details.                                             */
@@ -109,9 +109,12 @@ func resolve(w http.ResponseWriter, r *http.Request, server string, domain strin
 	c := new(dns.Client)
 
 Redo:
-	in, _, err := c.Exchange(m, server) // Second return value is RTT, not used for now
+	if in, _, err := c.Exchange(m, server); err == nil { // Second return value is RTT, not used for now
+		if in.MsgHdr.Truncated {
+			c.Net = "tcp"
+			goto Redo
+		}
 
-	if err == nil {
 		switch in.MsgHdr.Rcode {
 		case dns.RcodeServerFailure:
 			error(w, 500, 502, "The name server encountered an internal failure while processing this request (SERVFAIL)")
@@ -122,9 +125,6 @@ Redo:
 		default:
 			jsonify(w, r, in.Question, in.Answer, in.Ns, in.Extra)
 		}
-	} else if err == dns.ErrTruncated {
-		c.Net = "tcp"
-		goto Redo
 	} else {
 		error(w, 500, 501, "DNS server could not be reached")
 	}

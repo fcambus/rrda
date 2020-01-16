@@ -33,7 +33,7 @@ RRDA requires the following Go libraries:
 Build and install with the `go` tool, all dependencies will be automatically
 fetched and compiled:
 
-	go get -d -v ./... && go build -v ./...
+	go build
 	go install rrda
 
 ## Usage

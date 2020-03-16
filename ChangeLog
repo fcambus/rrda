@@ -1,8 +1,12 @@
-RRDA 1.03 (2017-??-??)
+RRDA 1.1.0 (2020-03-16)
 
 - Relicensed under the BSD 2-Clause license
-- Add support for FastCGI mode
+- Add support for running in FastCGI mode
+- Refactor host + port concatenation
 - Add a command line flag to display version
+- Switch back to using Msg.MsgHdr.Truncated, as dns.ErrTruncated is
+  obsoleted
+- Migrate to Go modules
 - Minor fixes and improvements
 
 

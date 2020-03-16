@@ -188,6 +188,6 @@ RRDA is developed by Frederic Cambus
 
 Project homepage: https://www.statdns.com
 
-Latest tarball release: https://www.statdns.com/rrda/rrda-1.02.tar.gz
+Latest tarball release: https://www.statdns.com/rrda/rrda-1.1.0.tar.gz
 
 GitHub: https://github.com/fcambus/rrda

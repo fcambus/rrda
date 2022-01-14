@@ -1,10 +1,10 @@
 /*
  * RRDA (RRDA REST DNS API) 1.1.0
- * Copyright (c) 2012-2020, Frederic Cambus
+ * Copyright (c) 2012-2022, Frederic Cambus
  * https://www.statdns.com
  *
  * Created: 2012-03-11
- * Last Updated: 2020-03-16
+ * Last Updated: 2022-01-14
  *
  * RRDA is released under the BSD 2-Clause license.
  * See LICENSE file for details.

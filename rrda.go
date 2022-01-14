@@ -18,7 +18,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/bmizerany/pat"
+	"github.com/go-chi/chi/v5"
 	"github.com/miekg/dns"
 	"golang.org/x/net/idna"
 	"io"
@@ -132,9 +132,9 @@ Redo:
 
 // Handler for DNS queries
 func query(w http.ResponseWriter, r *http.Request) {
-	server := r.URL.Query().Get(":server")
-	domain := dns.Fqdn(r.URL.Query().Get(":domain"))
-	querytype := r.URL.Query().Get(":querytype")
+	server := chi.URLParam(r, "server")
+	domain := dns.Fqdn(chi.URLParam(r, "domain"))
+	querytype := chi.URLParam(r, "querytype")
 
 	if domain, err := idna.ToASCII(domain); err == nil { // Valid domain name (ASCII or IDN)
 		if _, isDomain := dns.IsDomainName(domain); isDomain { // Well-formed domain name
@@ -153,8 +153,8 @@ func query(w http.ResponseWriter, r *http.Request) {
 
 // Handler for reverse DNS queries
 func ptr(w http.ResponseWriter, r *http.Request) {
-	server := r.URL.Query().Get(":server")
-	ip := r.URL.Query().Get(":ip")
+	server := chi.URLParam(r, "server")
+	ip := chi.URLParam(r, "ip")
 
 	if arpa, err := dns.ReverseAddr(ip); err == nil { // Valid IP address (IPv4 or IPv6)
 		resolve(w, r, server, arpa, dns.TypePTR)
@@ -190,19 +190,19 @@ func main() {
 
 	fmt.Println("Listening on ("+mode+" mode):", address)
 
-	m := pat.New()
-	m.Get("/:server/x/:ip", http.HandlerFunc(ptr))
-	m.Get("/:server/:domain/:querytype", http.HandlerFunc(query))
+	r := chi.NewRouter()
+	r.Get("/{server}/x/{ip}", ptr)
+	r.Get("/{server}/{domain}/{querytype}", query)
 
 	if *fastcgi {
 		listener, _ := net.Listen("tcp", address)
 
-		if err := fcgi.Serve(listener, m); err != nil {
+		if err := fcgi.Serve(listener, r); err != nil {
 			fmt.Println("\nERROR:", err)
 			os.Exit(1)
 		}
 	} else {
-		if err := http.ListenAndServe(address, m); err != nil {
+		if err := http.ListenAndServe(address, r); err != nil {
 			fmt.Println("\nERROR:", err)
 			os.Exit(1)
 		}

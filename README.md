@@ -25,8 +25,8 @@ RRDA is a recursive acronym for "RRDA REST DNS API".
 
 RRDA requires the following Go libraries:
 
+- chi: lightweight, idiomatic and composable router - https://github.com/go-chi/chi
 - dns: DNS library in Go - https://github.com/miekg/dns
-- pat: pattern muxer for Go - https://github.com/bmizerany/pat
 
 ## Installation
 

@@ -188,8 +188,6 @@ func main() {
 
 	address := *host + ":" + *port
 
-	fmt.Println("Listening on ("+mode+" mode):", address)
-
 	r := chi.NewRouter()
 	r.Get("/{server}/x/{ip}", ptr)
 	r.Get("/{server}/{domain}/{querytype}", query)
@@ -207,4 +205,6 @@ func main() {
 			os.Exit(1)
 		}
 	}
+
+	fmt.Println("Listening on ("+mode+" mode):", address)
 }

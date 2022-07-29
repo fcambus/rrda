@@ -1,3 +1,11 @@
+RRDA 1.2.0 (2022-07-29)
+
+- Add SPDX short license identifier in source file
+- Switch to using chi for URL routing
+- Move the "Listening on" message after successful server startup
+
+
+
 RRDA 1.1.0 (2020-03-16)
 
 - Relicensed under the BSD 2-Clause license

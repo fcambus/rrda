@@ -27,7 +27,10 @@ import (
 	"net/http/fcgi"
 	"os"
 	"strings"
+	"time"
 )
+
+var timeout_ms int
 
 type Error struct {
 	Code    int    `json:"code"`
@@ -107,6 +110,9 @@ func resolve(w http.ResponseWriter, r *http.Request, server string, domain strin
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	c := new(dns.Client)
+	c.Dialer = &net.Dialer{
+		Timeout: time.Duration(timeout_ms) * time.Millisecond,
+	}
 
 Redo:
 	if in, _, err := c.Exchange(m, server); err == nil { // Second return value is RTT, not used for now
@@ -167,6 +173,7 @@ func main() {
 	fastcgi := flag.Bool("fastcgi", false, "Enable FastCGI mode")
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")
+	flag.IntVar(&timeout_ms, "timeout", 2000, "Set the query timeout in ms")
 	version := flag.Bool("version", false, "Display version")
 
 	mode := "HTTP"

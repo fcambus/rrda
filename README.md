@@ -47,6 +47,8 @@ By default, RRDA will bind on localhost, port 8080, in HTTP mode.
 	        Set the server host (default "127.0.0.1")
 	  -port string
 	        Set the server port (default "8080")
+	  -timeout int
+	        Set the query timeout in ms (default 2000)
 	  -version
 	        Display version
 

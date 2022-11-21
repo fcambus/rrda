@@ -192,6 +192,6 @@ func main() {
 	r.Get("/{server}/x/{ip}", ptr)
 	r.Get("/{server}/{domain}/{querytype}", query)
 
-	fmt.Print("Listening on: http://", address + "\n")
+	fmt.Print("Listening on: http://", address+"\n")
 	log.Fatal(http.ListenAndServe(address, r))
 }

@@ -24,7 +24,6 @@ import (
 	"io"
 	"net"
 	"net/http"
-	"net/http/fcgi"
 	"os"
 	"strings"
 	"time"
@@ -170,13 +169,10 @@ func ptr(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fastcgi := flag.Bool("fastcgi", false, "Enable FastCGI mode")
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")
 	flag.IntVar(&timeout_ms, "timeout", 2000, "Set the query timeout in ms")
 	version := flag.Bool("version", false, "Display version")
-
-	mode := "HTTP"
 
 	flag.Usage = func() {
 		fmt.Println("\nUSAGE:")
@@ -189,29 +185,16 @@ func main() {
 		os.Exit(0)
 	}
 
-	if *fastcgi {
-		mode = "FastCGI"
-	}
-
 	address := *host + ":" + *port
 
 	r := chi.NewRouter()
 	r.Get("/{server}/x/{ip}", ptr)
 	r.Get("/{server}/{domain}/{querytype}", query)
 
-	if *fastcgi {
-		listener, _ := net.Listen("tcp", address)
-
-		if err := fcgi.Serve(listener, r); err != nil {
-			fmt.Println("\nERROR:", err)
-			os.Exit(1)
-		}
-	} else {
-		if err := http.ListenAndServe(address, r); err != nil {
-			fmt.Println("\nERROR:", err)
-			os.Exit(1)
-		}
+	if err := http.ListenAndServe(address, r); err != nil {
+		fmt.Println("\nERROR:", err)
+		os.Exit(1)
 	}
 
-	fmt.Println("Listening on ("+mode+" mode):", address)
+	fmt.Println("Listening on:", address)
 }

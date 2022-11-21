@@ -4,7 +4,7 @@
  * https://www.statdns.com
  *
  * Created: 2012-03-11
- * Last Updated: 2022-01-14
+ * Last Updated: 2022-11-21
  *
  * RRDA is released under the BSD 2-Clause license.
  * See LICENSE file for details.
@@ -22,6 +22,7 @@ import (
 	"github.com/miekg/dns"
 	"golang.org/x/net/idna"
 	"io"
+	"log"
 	"net"
 	"net/http"
 	"os"
@@ -191,10 +192,7 @@ func main() {
 	r.Get("/{server}/x/{ip}", ptr)
 	r.Get("/{server}/{domain}/{querytype}", query)
 
-	if err := http.ListenAndServe(address, r); err != nil {
-		fmt.Println("\nERROR:", err)
-		os.Exit(1)
-	}
+	log.Fatal(http.ListenAndServe(address, r))
 
 	fmt.Println("Listening on:", address)
 }

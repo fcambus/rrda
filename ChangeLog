@@ -1,3 +1,13 @@
+RRDA 1.3.0 (2022-11-21)
+
+- Allow setting a Timeout parameter through a net.Dialer (Thanks to
+  Sebastien Couture)
+- Remove support for running in FastCGI mode
+- Refactor error handling for http.ListenAndServe()
+- Restore and refactor the "Listening on" message display
+
+
+
 RRDA 1.2.0 (2022-07-29)
 
 - Add SPDX short license identifier in source file

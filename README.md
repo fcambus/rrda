@@ -63,17 +63,6 @@ To launch the daemon at startup, run:
 
 	systemctl enable rrda
 
-### FreeBSD rc.d script
-
-RRDA is bundled with a FreeBSD rc.d script, see: `freebsd/rrda`
-
-Copy the `freebsd/rrda` file in `/usr/local/etc/rc.d` and the RRDA binary in
-`/usr/local/sbin`.
-
-To launch the daemon at startup, add the following line in `/etc/rc.conf`:
-
-	rrda_enable="YES"
-
 ## Making Queries
 
 The following examples assume there is a resolver on localhost listening on port 53.

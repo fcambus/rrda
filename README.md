@@ -63,17 +63,6 @@ To launch the daemon at startup, run:
 
 	systemctl enable rrda
 
-### Debian init script
-
-RRDA is bundled with a Debian init script, see: `debian/rrda`
-
-Copy the `debian/rrda` file in `/etc/init.d` and modify the line containing
-`DAEMON=rrda` to specify the path to your RRDA binary.
-
-To launch the daemon at startup, run:
-
-	update-rc.d rrda defaults
-
 ### FreeBSD rc.d script
 
 RRDA is bundled with a FreeBSD rc.d script, see: `freebsd/rrda`

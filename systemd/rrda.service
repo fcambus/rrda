@@ -1,0 +1,12 @@
+[Unit]
+Description=RRDA REST DNS API
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=rrda
+Restart=on-failure
+DynamicUser=yes
+
+[Install]
+WantedBy=multi-user.target

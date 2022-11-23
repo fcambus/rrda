@@ -52,6 +52,17 @@ By default, RRDA will bind on localhost, port 8080.
 
 ## Running RRDA at boot time
 
+### Systemd unit file
+
+RRDA is bundled with a systemd unit file, see: `systemd/rrda.service`
+
+Copy the `systemd/rrda.service` file in `/etc/systemd/system` and the RRDA
+binary in `/usr/local/sbin`.
+
+To launch the daemon at startup, run:
+
+	systemctl enable rrda
+
 ### Debian init script
 
 RRDA is bundled with a Debian init script, see: `debian/rrda`

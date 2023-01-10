@@ -171,6 +171,13 @@ func ptr(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Handler for identifying a Name Server instance
+func id(w http.ResponseWriter, r *http.Request) {
+	server := chi.URLParam(r, "server")
+
+	resolve(w, r, server, "id.server.", dns.TypeTXT, dns.ClassCHAOS)
+}
+
 func main() {
 	host := flag.String("host", "127.0.0.1", "Set the server host")
 	port := flag.String("port", "8080", "Set the server port")
@@ -191,6 +198,7 @@ func main() {
 	address := *host + ":" + *port
 
 	r := chi.NewRouter()
+	r.Get("/{server}/id", id)
 	r.Get("/{server}/x/{ip}", ptr)
 	r.Get("/{server}/{domain}/{querytype}", query)
 

@@ -147,7 +147,7 @@ func query(w http.ResponseWriter, r *http.Request) {
 	if domain, err := idna.ToASCII(domain); err == nil { // Valid domain name (ASCII or IDN)
 		if _, isDomain := dns.IsDomainName(domain); isDomain { // Well-formed domain name
 			if querytype, ok := dns.StringToType[strings.ToUpper(querytype)]; ok { // Valid DNS query type
-				resolve(w, r, server, domain, querytype)
+				resolve(w, r, server, domain, querytype, dns.ClassINET)
 			} else {
 				error(w, 400, 404, "Invalid DNS query type")
 			}
@@ -165,7 +165,7 @@ func ptr(w http.ResponseWriter, r *http.Request) {
 	ip := chi.URLParam(r, "ip")
 
 	if arpa, err := dns.ReverseAddr(ip); err == nil { // Valid IP address (IPv4 or IPv6)
-		resolve(w, r, server, arpa, dns.TypePTR)
+		resolve(w, r, server, arpa, dns.TypePTR, dns.ClassINET)
 	} else {
 		error(w, 400, 403, "Input string is not a valid IP address")
 	}

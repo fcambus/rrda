@@ -101,10 +101,12 @@ func jsonify(w http.ResponseWriter, r *http.Request, question []dns.Question, an
 }
 
 // Perform DNS resolution
-func resolve(w http.ResponseWriter, r *http.Request, server string, domain string, querytype uint16) {
+func resolve(w http.ResponseWriter, r *http.Request, server string, domain string, querytype uint16, class uint16) {
 	m := new(dns.Msg)
-	m.SetQuestion(domain, querytype)
-	m.MsgHdr.RecursionDesired = true
+	m.Id = dns.Id()
+	m.RecursionDesired = true
+	m.Question = make([]dns.Question, 1)
+	m.Question[0] = dns.Question{domain, querytype, class}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")

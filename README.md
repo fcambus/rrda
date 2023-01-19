@@ -81,6 +81,13 @@ URL Scheme: http://server:port/resolver:port/x/ip
 - Example (IPv4): http://127.0.0.1:8080/127.0.0.1:53/x/193.0.6.139
 - Example (IPv6): http://127.0.0.1:8080/127.0.0.1:53/x/2001:67c:2e8:22::c100:68b
 
+### Identify a Name Server instance
+
+URL Scheme: http://server:port/resolver:port/id
+
+- Example (using an IPv4 resolver): http://127.0.0.1:8080/127.0.0.1:53/id
+- Example (using an IPv6 resolver): http://127.0.0.1:8080/[::1]:53/id
+
 ## JSONP Support
 
 RRDA supports JSONP callbacks.

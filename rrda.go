@@ -1,10 +1,10 @@
 /*
- * RRDA (RRDA REST DNS API) 1.3.0
+ * RRDA (RRDA REST DNS API) 1.4.0
  * Copyright (c) 2012-2023, Frederic Cambus
  * https://www.statdns.com
  *
  * Created: 2012-03-11
- * Last Updated: 2023-01-13
+ * Last Updated: 2023-01-19
  *
  * RRDA is released under the BSD 2-Clause license.
  * See LICENSE file for details.
@@ -191,7 +191,7 @@ func main() {
 	flag.Parse()
 
 	if *version {
-		fmt.Println("RRDA 1.3.0")
+		fmt.Println("RRDA 1.4.0")
 		os.Exit(0)
 	}
 

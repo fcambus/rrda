@@ -1,3 +1,15 @@
+RRDA 1.4.0 (2023-01-19)
+
+- Add a systemd unit file and document launching RRDA via systemd
+- Remove the Debian init script and its installation instructions
+- Remove the FreeBSD rc.d script and its installation instructions
+- Refactor the resolve function to allow passing a DNS class parameter
+- Pass dns.ClassINET when resolving from the 'ptr' and 'query' endpoint
+- Add an 'id' handler to identify a Name Server instance (RFC 4892)
+- Bump Go version to 1.19 in go.mod and update dependencies
+
+
+
 RRDA 1.3.0 (2022-11-21)
 
 - Allow setting a Timeout parameter through a net.Dialer (Thanks to

@@ -4,7 +4,7 @@
  * https://www.statdns.com
  *
  * Created: 2012-03-11
- * Last Updated: 2023-01-19
+ * Last Updated: 2023-11-28
  *
  * RRDA is released under the BSD 2-Clause license.
  * See LICENSE file for details.
@@ -201,6 +201,10 @@ func main() {
 	r.Get("/{server}/id", id)
 	r.Get("/{server}/x/{ip}", ptr)
 	r.Get("/{server}/{domain}/{querytype}", query)
+
+	r.Head("/{server}/id", id)
+	r.Head("/{server}/x/{ip}", ptr)
+	r.Head("/{server}/{domain}/{querytype}", query)
 
 	fmt.Print("Listening on: http://", address+"\n")
 	log.Fatal(http.ListenAndServe(address, r))

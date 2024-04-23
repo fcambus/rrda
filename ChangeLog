@@ -1,3 +1,10 @@
+RRDA 1.4.1 (2024-04-23)
+
+- Allow performing HTTP HEAD method requests on all endpoints
+- Bump Go version to 1.21 in go.mod and update dependencies
+
+
+
 RRDA 1.4.0 (2023-01-19)
 
 - Add a systemd unit file and document launching RRDA via systemd

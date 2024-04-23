@@ -1,5 +1,5 @@
 /*
- * RRDA (RRDA REST DNS API) 1.4.0
+ * RRDA (RRDA REST DNS API) 1.4.1
  * Copyright (c) 2012-2024, Frederic Cambus
  * https://www.statdns.com
  *
@@ -191,7 +191,7 @@ func main() {
 	flag.Parse()
 
 	if *version {
-		fmt.Println("RRDA 1.4.0")
+		fmt.Println("RRDA 1.4.1")
 		os.Exit(0)
 	}
 

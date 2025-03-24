@@ -1,6 +1,6 @@
 /*
  * RRDA (RRDA REST DNS API) 1.4.1
- * Copyright (c) 2012-2024, Frederic Cambus
+ * Copyright (c) 2012-2025, Frederic Cambus
  * https://www.statdns.com
  *
  * Created: 2012-03-11

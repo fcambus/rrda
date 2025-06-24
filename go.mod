@@ -5,7 +5,7 @@ go 1.23.0
 toolchain go1.23.7
 
 require (
-	github.com/go-chi/chi/v5 v5.2.1
+	github.com/go-chi/chi/v5 v5.2.2
 	github.com/miekg/dns v1.1.66
 	golang.org/x/net v0.41.0
 )

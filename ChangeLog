@@ -1,3 +1,9 @@
+RRDA 1.4.2 (2026-07-09)
+
+- Bump Go version to 1.25 in go.mod and update dependencies
+
+
+
 RRDA 1.4.1 (2024-04-23)
 
 - Allow performing HTTP HEAD method requests on all endpoints

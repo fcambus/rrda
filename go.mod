@@ -3,7 +3,7 @@ module rrda
 go 1.25.0
 
 require (
-	github.com/go-chi/chi/v5 v5.2.4
+	github.com/go-chi/chi/v5 v5.3.1
 	github.com/miekg/dns v1.1.72
 	golang.org/x/net v0.56.0
 )
